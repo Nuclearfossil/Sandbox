@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -31,7 +32,7 @@ namespace DataWrapper
     {
         public readonly string Name;
         public Schema(Type type)
-        {            
+        {
             Name = type.FullName;
             Fields = new List<Field>();
         }
@@ -69,6 +70,7 @@ namespace DataWrapper
 
     public class DataSchemaFactory
     {
+        private static Type sListType = typeof(IList);
         private Dictionary<string, DataType> mKnownTypes;
         private Dictionary<Type, DataType> mBaseTypes;
 
@@ -121,9 +123,11 @@ namespace DataWrapper
                         Console.WriteLine("Is an IList");
                     }
                 }
-                if (!field.FieldType.IsArray && 
-                    !(field.FieldType.IsGenericType && 
-                        (field.FieldType.GetGenericTypeDefinition() == typeof(IList<>))))
+                if (field.FieldType.IsArray || sListType.IsAssignableFrom(field.FieldType))
+                {
+                    Console.WriteLine("Dealing with an array/list type");
+                }
+                else
                 {
                     DataType dt = mKnownTypes[field.FieldType.FullName];
                     Field schemaField = new Field(field, dt);
@@ -173,10 +177,10 @@ namespace DataWrapper
                 PropertyInfo[] properties = type.GetProperties();
 
                 Console.WriteLine("=======================================");
-                Console.WriteLine("{0} Type: [{1}] <Should Match> [{2}] BaseName: [{3}]", 
+                Console.WriteLine("{0} Type: [{1}] <Should Match> [{2}] BaseName: [{3}]",
                                   baseType.Value.IsBuiltInType ? "Builtin" : "Custom",
-                                  type.FullName, 
-                                  baseType.Value.FullName, 
+                                  type.FullName,
+                                  baseType.Value.FullName,
                                   baseType.Value.BaseName);
                 if (baseType.Value.IsBuiltInType == false)
                 {
