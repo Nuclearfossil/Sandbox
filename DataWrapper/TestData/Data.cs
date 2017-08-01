@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DataWrapper.TestData
 {
@@ -34,7 +30,7 @@ namespace DataWrapper.TestData
         public string[] mArrayOfStrings;
         public Data[] mArrayOfData;
     }
-    
+
     [DataObject]
     struct TestStruct01
     {
