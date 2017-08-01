@@ -116,16 +116,27 @@ namespace DataWrapper
             foreach (var field in fields)
             {
                 // get the DataObject in the field
-                if (field.FieldType.IsGenericType)
-                {
-                    if (typeof(IList<>).IsAssignableFrom(field.FieldType.GetGenericTypeDefinition()))
-                    {
-                        Console.WriteLine("Is an IList");
-                    }
-                }
                 if (field.FieldType.IsArray || sListType.IsAssignableFrom(field.FieldType))
                 {
                     Console.WriteLine("Dealing with an array/list type");
+                    Type[] listTypes = field.FieldType.GetGenericArguments();
+
+                    if (listTypes.Length == 0)
+                    {
+                        Type elementType = field.FieldType.GetElementType();
+                        DataType elementDT = mKnownTypes[elementType.FullName];
+                        Field schemaField = new Field(field, elementDT);
+                        result.Fields.Add(schemaField);
+                    }
+                    else
+                    {
+                        foreach (var listType in listTypes)
+                        {
+                            DataType listDT = mKnownTypes[listType.FullName];
+                            Field schemaField = new Field(field, listDT);
+                            result.Fields.Add(schemaField);
+                        }
+                    }
                 }
                 else
                 {
