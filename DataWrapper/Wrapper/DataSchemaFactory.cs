@@ -11,9 +11,11 @@ namespace DataWrapper
     {
         public string Name { get; private set; }
         public DataType BoundType { get; private set; }
+        public bool IsArray { get; private set; }
+
         private readonly char[] delimiters = { '<', '>' };
 
-        public Field(FieldInfo sourceField, DataType dataType)
+        public Field(FieldInfo sourceField, DataType dataType, bool isArray = false)
         {
             if (sourceField.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
             {
@@ -25,6 +27,7 @@ namespace DataWrapper
                 Name = sourceField.Name;
             }
             BoundType = dataType;
+            IsArray = isArray;
         }
     }
 
@@ -125,7 +128,7 @@ namespace DataWrapper
                     {
                         Type elementType = field.FieldType.GetElementType();
                         DataType elementDT = mKnownTypes[elementType.FullName];
-                        Field schemaField = new Field(field, elementDT);
+                        Field schemaField = new Field(field, elementDT, true);
                         result.Fields.Add(schemaField);
                     }
                     else
@@ -133,7 +136,7 @@ namespace DataWrapper
                         foreach (var listType in listTypes)
                         {
                             DataType listDT = mKnownTypes[listType.FullName];
-                            Field schemaField = new Field(field, listDT);
+                            Field schemaField = new Field(field, listDT, true);
                             result.Fields.Add(schemaField);
                         }
                     }
