@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataWrapper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="412.288" Width="525">
+    <Grid Margin="0,0,2,4">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="355" Margin="10,10,0,0" VerticalAlignment="Top" Width="495">
+            <TabItem Header="New Data">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock x:Name="mOutputBlock" HorizontalAlignment="Left" Margin="10,33,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="277" Width="465" Foreground="Black"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Old Data">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl HorizontalAlignment="Left" Height="100" Margin="37,117,0,0" VerticalAlignment="Top" Width="237">
+                        <TabItem Header="TabItem" Margin="-10,0,6,-2">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="83*"/>
+                                    <ColumnDefinition Width="148*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                    <Slider HorizontalAlignment="Left" Margin="329,222,0,0" VerticalAlignment="Top" Width="182"/>
+                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="329,201,0,0" VerticalAlignment="Top" Width="182"/>
+                    <ListBox HorizontalAlignment="Left" Height="121" Margin="322,55,0,0" VerticalAlignment="Top" Width="182"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="120" Height="33"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="33"/>
+                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Label" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="237"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

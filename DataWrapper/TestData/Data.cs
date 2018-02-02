@@ -57,4 +57,47 @@ namespace DataWrapper.TestData
         float mFloatValue;
         string mStringValue;
     }
+
+    public struct PropertyStruct01
+    {
+        float value01;
+        int value02;
+        string value03;
+
+        public float Value01
+        {
+            get
+            {
+                return value01;
+            }
+            set
+            {
+                value01 = value;
+            }
+        }
+
+        public int Value02
+        {
+            get
+            {
+                return value02;
+            }
+            set
+            {
+                value02 = value;
+            }
+        }
+
+        public string Value03
+        {
+            get
+            {
+                return value03;
+            }
+            set
+            {
+                value03 = value;
+            }
+        }
+    }
 }

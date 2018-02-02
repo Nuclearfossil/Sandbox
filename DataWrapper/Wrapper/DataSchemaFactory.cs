@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DataWrapper.TestData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -121,7 +123,7 @@ namespace DataWrapper
                 // get the DataObject in the field
                 if (field.FieldType.IsArray || sListType.IsAssignableFrom(field.FieldType))
                 {
-                    Console.WriteLine("Dealing with an array/list type");
+                    Console.WriteLine("Dealing with an array/list type {0}", field.Name);
                     Type[] listTypes = field.FieldType.GetGenericArguments();
 
                     if (listTypes.Length == 0)
@@ -212,6 +214,7 @@ namespace DataWrapper
         }
 
         private static int mIndentLevel = 0;
+
         private void DebugSchema(DataType type)
         {
             if (type.IsBuiltInType)
@@ -229,10 +232,6 @@ namespace DataWrapper
                 DebugSchema(item.BoundType);
                 mIndentLevel--;
             }
-        }
-
-        private void DoNothing()
-        {
         }
     }
 }

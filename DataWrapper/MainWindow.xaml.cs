@@ -11,7 +11,7 @@ namespace DataWrapper
     {
         private DataSchemaFactory mDataSchemaFactory;
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="currentAssembly"></param>
         private void BuildDataSchemas(Assembly currentAssembly)
